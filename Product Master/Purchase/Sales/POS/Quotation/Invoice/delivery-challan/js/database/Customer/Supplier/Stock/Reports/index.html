@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAAD Engineering ERP - Reports</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.header{
+background:#0d47a1;
+color:white;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+width:96%;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
+}
+
+h2{
+margin-bottom:20px;
+color:#0d47a1;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-bottom:20px;
+}
+
+th{
+background:#0d47a1;
+color:white;
+padding:10px;
+border:1px solid #ccc;
+}
+
+td{
+padding:8px;
+border:1px solid #ccc;
+}
+
+input,select{
+width:100%;
+padding:8px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+.report-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.card{
+background:#ffffff;
+border:1px solid #ddd;
+border-radius:8px;
+padding:20px;
+text-align:center;
+box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+
+.card h3{
+color:#0d47a1;
+margin-bottom:10px;
+}
+
+button{
+padding:10px 20px;
+margin:5px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+color:white;
+}
+
+.view{background:#0d6efd;}
+.print{background:#198754;}
+.pdf{background:#dc3545;}
+.excel{background:#fd7e14;}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+SAAD Engineering ERP
+</div>
+
+<div class="container">
+
+<h2>📈 Reports Center</h2>
+
+<table>
+
+<tr>
+<th>From Date</th>
+<td><input type="date"></td>
+
+<th>To Date</th>
+<td><input type="date"></td>
+</tr>
+
+<tr>
+<th>Report Type</th>
+<td>
+<select>
+
+<option>Sales Report</option>
+<option>Purchase Report</option>
+<option>Stock Report</option>
+<option>Customer Report</option>
+<option>Supplier Report</option>
+<option>Quotation Report</option>
+<option>Invoice Report</option>
+<option>Delivery Challan Report</option>
+<option>Profit Report</option>
+
+</select>
+
+</td>
+
+<th>Status</th>
+
+<td>
+
+<select>
+
+<option>All</option>
+<option>Completed</option>
+<option>Pending</option>
+
+</select>
+
+</td>
+
+</tr>
+
+</table>
+
+<div class="report-grid">
+
+<div class="card">
+<h3>📊 Sales Report</h3>
+<button class="view">View</button>
+<button class="print">Print</button>
+<button class="pdf">PDF</button>
+<button class="excel">Excel</button>
+</div>
+
+<div class="card">
+<h3>📦 Purchase Report</h3>
+<button class="view">View</button>
+<button class="print">Print</button>
+<button class="pdf">PDF</button>
+<button class="excel">Excel</button>
+</div>
+
+<div class="card">
+<h3>📋 Stock Report</h3>
+<button class="view">View</button>
+<button class="print">Print</button>
+<button class="pdf">PDF</button>
+<button class="excel">Excel</button>
+</div>
+
+<div class="card">
+<h3>💰 Profit Report</h3>
+<button class="view">View</button>
+<button class="print">Print</button>
+<button class="pdf">PDF</button>
+<button class="excel">Excel</button>
+</div>
+
+<div class="card">
+<h3>👥 Customer Report</h3>
+<button class="view">View</button>
+<button class="print">Print</button>
+<button class="pdf">PDF</button>
+<button class="excel">Excel</button>
+</div>
+
+<div class="card">
+<h3>🏢 Supplier Report</h3>
+<button class="view">View</button>
+<button class="print">Print</button>
+<button class="pdf">PDF</button>
+<button class="excel">Excel</button>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
