@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAAD Engineering ERP - Customer</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.header{
+background:#0d47a1;
+color:white;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+width:95%;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
+}
+
+h2{
+color:#0d47a1;
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#0d47a1;
+color:white;
+padding:10px;
+border:1px solid #ccc;
+}
+
+td{
+padding:8px;
+border:1px solid #ccc;
+}
+
+input,select,textarea{
+width:100%;
+padding:8px;
+}
+
+.buttons{
+margin-top:20px;
+}
+
+button{
+padding:10px 20px;
+margin-right:10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:15px;
+}
+
+.save{
+background:#28a745;
+color:white;
+}
+
+.edit{
+background:#ffc107;
+}
+
+.delete{
+background:#dc3545;
+color:white;
+}
+
+.clear{
+background:#6c757d;
+color:white;
+}
+
+.search{
+background:#17a2b8;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+SAAD Engineering ERP
+
+</div>
+
+<div class="container">
+
+<h2>👥 Customer Master</h2>
+
+<table>
+
+<tr>
+
+<th>Customer ID</th>
+
+<td><input type="text" value="CUS-000001"></td>
+
+<th>Registration Date</th>
+
+<td><input type="date"></td>
+
+</tr>
+
+<tr>
+
+<th>Customer Name</th>
+
+<td><input type="text"></td>
+
+<th>Company Name</th>
+
+<td><input type="text"></td>
+
+</tr>
+
+<tr>
+
+<th>Mobile</th>
+
+<td><input type="text"></td>
+
+<th>Email</th>
+
+<td><input type="email"></td>
+
+</tr>
+
+<tr>
+
+<th>Address</th>
+
+<td colspan="3">
+<textarea rows="3"></textarea>
+</td>
+
+</tr>
+
+<tr>
+
+<th>NID / BIN</th>
+
+<td><input type="text"></td>
+
+<th>Status</th>
+
+<td>
+
+<select>
+
+<option>Active</option>
+
+<option>Inactive</option>
+
+</select>
+
+</td>
+
+</tr>
+
+</table>
+
+<div class="buttons">
+
+<button class="save">💾 Save</button>
+
+<button class="edit">✏ Edit</button>
+
+<button class="delete">🗑 Delete</button>
+
+<button class="search">🔍 Search</button>
+
+<button class="clear">❌ Clear</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
