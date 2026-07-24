@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAAD Engineering ERP - Product Master</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.header{
+background:#0d47a1;
+color:#fff;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+width:95%;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
+}
+
+h2{
+margin-bottom:20px;
+color:#0d47a1;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+table th{
+background:#0d47a1;
+color:#fff;
+padding:10px;
+border:1px solid #ccc;
+}
+
+table td{
+padding:8px;
+border:1px solid #ccc;
+}
+
+input,select{
+width:100%;
+padding:8px;
+}
+
+.buttons{
+margin-top:20px;
+}
+
+button{
+padding:10px 20px;
+margin-right:10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:15px;
+}
+
+.save{
+background:#28a745;
+color:white;
+}
+
+.clear{
+background:#dc3545;
+color:white;
+}
+
+.edit{
+background:#ffc107;
+}
+
+.delete{
+background:#6c757d;
+color:white;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+SAAD Engineering ERP
+</div>
+
+<div class="container">
+
+<h2>📦 Product Master</h2>
+
+<table>
+
+<tr>
+<th>Product Code</th>
+<td><input type="text" value="PRD-000001"></td>
+
+<th>Part Number</th>
+<td><input type="text"></td>
+</tr>
+
+<tr>
+<th>Product Name</th>
+<td><input type="text"></td>
+
+<th>Brand</th>
+<td><input type="text"></td>
+</tr>
+
+<tr>
+<th>Category</th>
+<td>
+<select>
+<option>Generator</option>
+<option>Engine</option>
+<option>Filter</option>
+<option>Bearing</option>
+<option>Electrical</option>
+<option>Others</option>
+</select>
+</td>
+
+<th>Unit</th>
+<td>
+<select>
+<option>Pcs</option>
+<option>Set</option>
+<option>Litre</option>
+<option>Meter</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<th>Purchase Price</th>
+<td><input type="number"></td>
+
+<th>Selling Price</th>
+<td><input type="number"></td>
+</tr>
+
+<tr>
+<th>Opening Stock</th>
+<td><input type="number"></td>
+
+<th>Minimum Stock</th>
+<td><input type="number"></td>
+</tr>
+
+</table>
+
+<div class="buttons">
+
+<button class="save">💾 Save</button>
+
+<button class="edit">✏ Edit</button>
+
+<button class="delete">🗑 Delete</button>
+
+<button class="clear">❌ Clear</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
