@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAAD Engineering ERP - Delivery Challan</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.header{
+background:#0d47a1;
+color:#fff;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+width:95%;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
+}
+
+h2{
+color:#0d47a1;
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#0d47a1;
+color:#fff;
+padding:10px;
+border:1px solid #ccc;
+}
+
+td{
+padding:8px;
+border:1px solid #ccc;
+}
+
+input,textarea{
+width:100%;
+padding:8px;
+}
+
+.buttons{
+margin-top:20px;
+}
+
+button{
+padding:10px 20px;
+margin-right:10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:15px;
+}
+
+.save{
+background:#28a745;
+color:white;
+}
+
+.print{
+background:#17a2b8;
+color:white;
+}
+
+.pdf{
+background:#ff9800;
+color:white;
+}
+
+.clear{
+background:#dc3545;
+color:white;
+}
+
+.footer{
+margin-top:20px;
+text-align:right;
+font-size:18px;
+font-weight:bold;
+color:#d32f2f;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+SAAD Engineering ERP
+</div>
+
+<div class="container">
+
+<h2>🚚 Delivery Challan</h2>
+
+<table>
+
+<tr>
+
+<th>Challan No</th>
+
+<td><input type="text" value="DC-000001"></td>
+
+<th>Date</th>
+
+<td><input type="date"></td>
+
+</tr>
+
+<tr>
+
+<th>Customer Name</th>
+
+<td><input type="text"></td>
+
+<th>Mobile</th>
+
+<td><input type="text"></td>
+
+</tr>
+
+<tr>
+
+<th>Delivery Address</th>
+
+<td colspan="3">
+<input type="text">
+</td>
+
+</tr>
+
+<tr>
+
+<th>Invoice No</th>
+
+<td><input type="text"></td>
+
+<th>Vehicle No</th>
+
+<td><input type="text"></td>
+
+</tr>
+
+<tr>
+
+<th>Product Name</th>
+
+<td><input type="text"></td>
+
+<th>Quantity</th>
+
+<td><input type="number"></td>
+
+</tr>
+
+<tr>
+
+<th>Remarks</th>
+
+<td colspan="3">
+<textarea rows="4"></textarea>
+</td>
+
+</tr>
+
+</table>
+
+<div class="footer">
+
+Received By : ____________________
+
+</div>
+
+<div class="buttons">
+
+<button class="save">💾 Save</button>
+
+<button class="print">🖨 Print</button>
+
+<button class="pdf">📄 PDF</button>
+
+<button class="clear">❌ Clear</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
