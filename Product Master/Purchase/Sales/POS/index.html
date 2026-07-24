@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAAD Engineering ERP - Sales POS</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.header{
+background:#0d47a1;
+color:#fff;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+width:96%;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
+}
+
+h2{
+color:#0d47a1;
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#0d47a1;
+color:white;
+padding:10px;
+border:1px solid #ccc;
+}
+
+td{
+padding:8px;
+border:1px solid #ccc;
+}
+
+input{
+width:100%;
+padding:8px;
+}
+
+.buttons{
+margin-top:20px;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-right:10px;
+font-size:15px;
+}
+
+.save{
+background:#28a745;
+color:white;
+}
+
+.print{
+background:#17a2b8;
+color:white;
+}
+
+.clear{
+background:#dc3545;
+color:white;
+}
+
+.total{
+font-size:24px;
+font-weight:bold;
+text-align:right;
+margin-top:20px;
+color:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+SAAD Engineering ERP
+
+</div>
+
+<div class="container">
+
+<h2>💰 Sales / POS</h2>
+
+<table>
+
+<tr>
+
+<th>Invoice No</th>
+
+<td><input type="text" value="INV-000001"></td>
+
+<th>Date</th>
+
+<td><input type="date"></td>
+
+</tr>
+
+<tr>
+
+<th>Customer Name</th>
+
+<td><input type="text"></td>
+
+<th>Mobile</th>
+
+<td><input type="text"></td>
+
+</tr>
+
+<tr>
+
+<th>Barcode</th>
+
+<td><input type="text"></td>
+
+<th>Product Name</th>
+
+<td><input type="text"></td>
+
+</tr>
+
+<tr>
+
+<th>Quantity</th>
+
+<td><input type="number"></td>
+
+<th>Unit Price</th>
+
+<td><input type="number"></td>
+
+</tr>
+
+<tr>
+
+<th>Discount</th>
+
+<td><input type="number"></td>
+
+<th>Total</th>
+
+<td><input type="number"></td>
+
+</tr>
+
+</table>
+
+<div class="total">
+
+Grand Total : ৳ 0.00
+
+</div>
+
+<div class="buttons">
+
+<button class="save">💾 Save</button>
+
+<button class="print">🖨 Print</button>
+
+<button class="clear">❌ Clear</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
