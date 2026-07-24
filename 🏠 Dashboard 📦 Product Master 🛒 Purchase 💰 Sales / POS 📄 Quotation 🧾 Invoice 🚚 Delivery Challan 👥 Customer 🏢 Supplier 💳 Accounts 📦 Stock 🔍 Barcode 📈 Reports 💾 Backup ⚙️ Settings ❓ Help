@@ -3,146 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAAD Engineering ERP</title>
+<title>SAAD Engineering ERP - Dashboard</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 body{
-    display:flex;
-    background:#f4f6f9;
-}
-
-.sidebar{
-    width:250px;
-    height:100vh;
-    background:#0d47a1;
-    color:#fff;
-    position:fixed;
-    padding:20px;
-}
-
-.sidebar h2{
-    margin-bottom:20px;
-    text-align:center;
-}
-
-.sidebar ul{
-    list-style:none;
-}
-
-.sidebar ul li{
-    padding:12px;
-    border-bottom:1px solid rgba(255,255,255,.2);
-}
-
-.sidebar ul li:hover{
-    background:#1565c0;
-    cursor:pointer;
-}
-
-.main{
-    margin-left:250px;
-    width:100%;
-    padding:20px;
+background:#f4f6f9;
 }
 
 .header{
-    background:#fff;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:20px;
-    box-shadow:0 2px 5px rgba(0,0,0,.1);
+background:#004d7a;
+color:#fff;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+padding:20px;
 }
 
 .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
 .card{
-    background:#fff;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-    box-shadow:0 2px 5px rgba(0,0,0,.1);
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+text-align:center;
 }
 
-.card h3{
-    margin-bottom:10px;
+.card h2{
+font-size:18px;
+color:#333;
+margin-bottom:10px;
 }
 
 .card p{
-    font-size:26px;
-    font-weight:bold;
-    color:#0d47a1;
+font-size:28px;
+font-weight:bold;
+color:#004d7a;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+padding:15px;
+color:#666;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="sidebar">
-<h2>SAAD ERP</h2>
-
-<ul>
-<li>🏠 Dashboard</li>
-<li>📦 Product Master</li>
-<li>🛒 Purchase</li>
-<li>💰 Sales / POS</li>
-<li>📄 Quotation</li>
-<li>🧾 Invoice</li>
-<li>🚚 Delivery Challan</li>
-<li>👥 Customer</li>
-<li>🏢 Supplier</li>
-<li>💳 Accounts</li>
-<li>📦 Stock</li>
-<li>🔍 Barcode</li>
-<li>📈 Reports</li>
-<li>💾 Backup</li>
-<li>⚙️ Settings</li>
-<li>❓ Help</li>
-</ul>
-
-</div>
-
-<div class="main">
-
 <div class="header">
-<h1>SAAD Engineering ERP Dashboard</h1>
-<p>Welcome, Nur Mohammad Mia</p>
+SAAD ENGINEERING ERP
 </div>
+
+<div class="container">
 
 <div class="cards">
 
 <div class="card">
-<h3>Today's Sales</h3>
-<p>৳ 0</p>
+<h2>Today's Sales</h2>
+<p>৳0</p>
 </div>
 
 <div class="card">
-<h3>Total Products</h3>
+<h2>Total Purchase</h2>
+<p>৳0</p>
+</div>
+
+<div class="card">
+<h2>Total Stock</h2>
+<p>0 Items</p>
+</div>
+
+<div class="card">
+<h2>Customers</h2>
 <p>0</p>
 </div>
 
 <div class="card">
-<h3>Customers</h3>
+<h2>Suppliers</h2>
 <p>0</p>
 </div>
 
 <div class="card">
-<h3>Low Stock</h3>
-<p>0</p>
+<h2>Profit</h2>
+<p>৳0</p>
 </div>
 
 </div>
 
+</div>
+
+<div class="footer">
+© 2026 SAAD Engineering ERP
 </div>
 
 </body>
