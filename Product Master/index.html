@@ -4,182 +4,419 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAAD Engineering ERP - Product Master</title>
-
 <style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
 }
-
 body{
-background:#f4f6f9;
+  background:#f4f6f9;
 }
-
 .header{
-background:#0d47a1;
-color:#fff;
-padding:20px;
-text-align:center;
-font-size:28px;
-font-weight:bold;
+  background:#0d47a1;
+  color:#fff;
+  padding:20px;
+  text-align:center;
+  font-size:28px;
+  font-weight:bold;
 }
-
 .container{
-width:95%;
-margin:20px auto;
-background:#fff;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.15);
+  width:95%;
+  max-width:1100px;
+  margin:20px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,.15);
 }
-
 h2{
-margin-bottom:20px;
-color:#0d47a1;
+  margin-bottom:20px;
+  color:#0d47a1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:20px;
 }
-
+#form-mode-label{
+  font-size:13px;
+  font-weight:normal;
+  background:#e8f0fe;
+  color:#0d47a1;
+  padding:4px 10px;
+  border-radius:20px;
+}
+#form-mode-label.editing{
+  background:#fff3cd;
+  color:#8a6d1a;
+}
 table{
-width:100%;
-border-collapse:collapse;
+  width:100%;
+  border-collapse:collapse;
 }
-
 table th{
-background:#0d47a1;
-color:#fff;
-padding:10px;
-border:1px solid #ccc;
+  background:#0d47a1;
+  color:#fff;
+  padding:10px;
+  border:1px solid #ccc;
 }
-
 table td{
-padding:8px;
-border:1px solid #ccc;
+  padding:8px;
+  border:1px solid #ccc;
 }
-
 input,select{
-width:100%;
-padding:8px;
+  width:100%;
+  padding:8px;
+  border:1px solid #ccc;
+  border-radius:4px;
+  font-size:14px;
 }
-
+input:focus,select:focus{
+  outline:2px solid #0d47a1;
+}
 .buttons{
-margin-top:20px;
+  margin-top:20px;
 }
-
 button{
-padding:10px 20px;
-margin-right:10px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-font-size:15px;
+  padding:10px 20px;
+  margin-right:10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:15px;
 }
-
 .save{
-background:#28a745;
-color:white;
+  background:#28a745;
+  color:white;
 }
-
 .clear{
-background:#dc3545;
-color:white;
+  background:#dc3545;
+  color:white;
 }
-
 .edit{
-background:#ffc107;
+  background:#ffc107;
+}
+.delete{
+  background:#6c757d;
+  color:white;
+}
+.save:disabled, .edit:disabled, .delete:disabled{
+  opacity:.5;
+  cursor:not-allowed;
 }
 
-.delete{
-background:#6c757d;
-color:white;
+/* --- Product list --- */
+.list-section{
+  margin-top:34px;
+}
+.list-section h3{
+  color:#0d47a1;
+  margin-bottom:12px;
+  font-size:18px;
+}
+.list-wrap{
+  overflow-x:auto;
+}
+#product-table th, #product-table td{
+  text-align:left;
+  font-size:13.5px;
+}
+#product-table tbody tr:hover{
+  background:#f4f8ff;
+}
+.row-btn{
+  padding:5px 10px;
+  margin-right:6px;
+  font-size:12.5px;
+}
+.badge{
+  display:inline-block;
+  padding:2px 8px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:bold;
+}
+.badge.low{ background:#fbe7e1; color:#c23b22; }
+.badge.ok{ background:#e5f1e9; color:#28a745; }
+.empty-msg{
+  text-align:center;
+  color:#888;
+  padding:20px;
+  font-style:italic;
 }
 </style>
-
 </head>
-
 <body>
 
 <div class="header">
-SAAD Engineering ERP
+  SAAD Engineering ERP
 </div>
 
 <div class="container">
+  <h2>
+    📦 Product Master
+    <span id="form-mode-label">Adding new product</span>
+  </h2>
 
-<h2>📦 Product Master</h2>
+  <form id="product-form">
+    <table>
+      <tr>
+        <th>Product Code</th>
+        <td><input type="text" id="f-code" required></td>
+        <th>Part Number</th>
+        <td><input type="text" id="f-part"></td>
+      </tr>
+      <tr>
+        <th>Product Name</th>
+        <td><input type="text" id="f-name" required></td>
+        <th>Brand</th>
+        <td><input type="text" id="f-brand"></td>
+      </tr>
+      <tr>
+        <th>Category</th>
+        <td>
+          <select id="f-category">
+            <option>Generator</option>
+            <option>Engine</option>
+            <option>Filter</option>
+            <option>Bearing</option>
+            <option>Electrical</option>
+            <option>Others</option>
+          </select>
+        </td>
+        <th>Unit</th>
+        <td>
+          <select id="f-unit">
+            <option>Pcs</option>
+            <option>Set</option>
+            <option>Litre</option>
+            <option>Meter</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>Purchase Price</th>
+        <td><input type="number" id="f-purchase-price" min="0" step="0.01" required></td>
+        <th>Selling Price</th>
+        <td><input type="number" id="f-selling-price" min="0" step="0.01" required></td>
+      </tr>
+      <tr>
+        <th>Opening Stock</th>
+        <td><input type="number" id="f-stock" min="0" required></td>
+        <th>Minimum Stock</th>
+        <td><input type="number" id="f-min-stock" min="0" required></td>
+      </tr>
+    </table>
 
-<table>
+    <div class="buttons">
+      <button type="submit" class="save" id="btn-save">💾 Save</button>
+      <button type="button" class="edit" id="btn-edit" disabled title="Select a row from the list below first">✏ Edit selected</button>
+      <button type="button" class="delete" id="btn-delete" disabled title="Select a row from the list below first">🗑 Delete selected</button>
+      <button type="button" class="clear" id="btn-clear">❌ Clear</button>
+    </div>
+  </form>
 
-<tr>
-<th>Product Code</th>
-<td><input type="text" value="PRD-000001"></td>
-
-<th>Part Number</th>
-<td><input type="text"></td>
-</tr>
-
-<tr>
-<th>Product Name</th>
-<td><input type="text"></td>
-
-<th>Brand</th>
-<td><input type="text"></td>
-</tr>
-
-<tr>
-<th>Category</th>
-<td>
-<select>
-<option>Generator</option>
-<option>Engine</option>
-<option>Filter</option>
-<option>Bearing</option>
-<option>Electrical</option>
-<option>Others</option>
-</select>
-</td>
-
-<th>Unit</th>
-<td>
-<select>
-<option>Pcs</option>
-<option>Set</option>
-<option>Litre</option>
-<option>Meter</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<th>Purchase Price</th>
-<td><input type="number"></td>
-
-<th>Selling Price</th>
-<td><input type="number"></td>
-</tr>
-
-<tr>
-<th>Opening Stock</th>
-<td><input type="number"></td>
-
-<th>Minimum Stock</th>
-<td><input type="number"></td>
-</tr>
-
-</table>
-
-<div class="buttons">
-
-<button class="save">💾 Save</button>
-
-<button class="edit">✏ Edit</button>
-
-<button class="delete">🗑 Delete</button>
-
-<button class="clear">❌ Clear</button>
-
+  <div class="list-section">
+    <h3>All products (<span id="product-count">0</span>)</h3>
+    <div class="list-wrap">
+      <table id="product-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Unit</th>
+            <th>Purchase</th>
+            <th>Selling</th>
+            <th>Stock</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="product-body">
+          <tr><td colspan="10" class="empty-msg">No products saved yet — fill the form above and click Save.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
-</div>
+<script>
+(function(){
+  "use strict";
+
+  // In-memory product list (resets on page reload — no backend/database wired up yet)
+  let products = [];
+  let nextSeq = 1;
+  let selectedId = null;   // row selected via radio button in the list
+  let editingId = null;    // id currently loaded into the form for editing
+
+  const form = document.getElementById('product-form');
+  const modeLabel = document.getElementById('form-mode-label');
+  const productBody = document.getElementById('product-body');
+  const productCount = document.getElementById('product-count');
+  const btnEdit = document.getElementById('btn-edit');
+  const btnDelete = document.getElementById('btn-delete');
+
+  const fields = {
+    code: document.getElementById('f-code'),
+    part: document.getElementById('f-part'),
+    name: document.getElementById('f-name'),
+    brand: document.getElementById('f-brand'),
+    category: document.getElementById('f-category'),
+    unit: document.getElementById('f-unit'),
+    purchasePrice: document.getElementById('f-purchase-price'),
+    sellingPrice: document.getElementById('f-selling-price'),
+    stock: document.getElementById('f-stock'),
+    minStock: document.getElementById('f-min-stock'),
+  };
+
+  function nextCode(){
+    return 'PRD-' + String(nextSeq).padStart(6,'0');
+  }
+
+  function resetForm(){
+    form.reset();
+    fields.code.value = nextCode();
+    editingId = null;
+    modeLabel.textContent = 'Adding new product';
+    modeLabel.classList.remove('editing');
+  }
+
+  function readForm(){
+    return {
+      code: fields.code.value.trim(),
+      part: fields.part.value.trim(),
+      name: fields.name.value.trim(),
+      brand: fields.brand.value.trim(),
+      category: fields.category.value,
+      unit: fields.unit.value,
+      purchasePrice: parseFloat(fields.purchasePrice.value) || 0,
+      sellingPrice: parseFloat(fields.sellingPrice.value) || 0,
+      stock: parseInt(fields.stock.value, 10) || 0,
+      minStock: parseInt(fields.minStock.value, 10) || 0,
+    };
+  }
+
+  function fillForm(p){
+    fields.code.value = p.code;
+    fields.part.value = p.part;
+    fields.name.value = p.name;
+    fields.brand.value = p.brand;
+    fields.category.value = p.category;
+    fields.unit.value = p.unit;
+    fields.purchasePrice.value = p.purchasePrice;
+    fields.sellingPrice.value = p.sellingPrice;
+    fields.stock.value = p.stock;
+    fields.minStock.value = p.minStock;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const data = readForm();
+
+    if(!data.code || !data.name){
+      alert('Product Code and Product Name are required.');
+      return;
+    }
+
+    // block duplicate codes (except when editing that same product)
+    const clash = products.find(p => p.code === data.code && p.id !== editingId);
+    if(clash){
+      alert('That Product Code is already in use. Choose a different one.');
+      return;
+    }
+
+    if(editingId !== null){
+      const idx = products.findIndex(p => p.id === editingId);
+      products[idx] = Object.assign({id: editingId}, data);
+    } else {
+      products.push(Object.assign({id: nextSeq++}, data));
+    }
+
+    renderList();
+    resetForm();
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', function(){
+    resetForm();
+    selectedId = null;
+    btnEdit.disabled = true;
+    btnDelete.disabled = true;
+    renderList();
+  });
+
+  btnEdit.addEventListener('click', function(){
+    if(selectedId === null) return;
+    const p = products.find(p => p.id === selectedId);
+    if(!p) return;
+    fillForm(p);
+    editingId = p.id;
+    modeLabel.textContent = 'Editing: ' + p.code;
+    modeLabel.classList.add('editing');
+  });
+
+  btnDelete.addEventListener('click', function(){
+    if(selectedId === null) return;
+    const p = products.find(p => p.id === selectedId);
+    if(!p) return;
+    if(!confirm('Delete product "' + p.name + '" (' + p.code + ')?')) return;
+    products = products.filter(x => x.id !== selectedId);
+    selectedId = null;
+    btnEdit.disabled = true;
+    btnDelete.disabled = true;
+    if(editingId !== null && !products.find(x => x.id === editingId)){
+      resetForm();
+    }
+    renderList();
+  });
+
+  function selectRow(id){
+    selectedId = id;
+    btnEdit.disabled = false;
+    btnDelete.disabled = false;
+    renderList();
+  }
+
+  function renderList(){
+    productCount.textContent = products.length;
+
+    if(products.length === 0){
+      productBody.innerHTML = '<tr><td colspan="10" class="empty-msg">No products saved yet — fill the form above and click Save.</td></tr>';
+      return;
+    }
+
+    productBody.innerHTML = products.map(function(p){
+      const low = p.stock <= p.minStock;
+      const checked = p.id === selectedId ? 'checked' : '';
+      return '<tr>' +
+        '<td><input type="radio" name="row-select" ' + checked + ' data-select="' + p.id + '"></td>' +
+        '<td>' + p.code + '</td>' +
+        '<td>' + p.name + '</td>' +
+        '<td>' + p.category + '</td>' +
+        '<td>' + (p.brand || '—') + '</td>' +
+        '<td>' + p.unit + '</td>' +
+        '<td>' + p.purchasePrice.toFixed(2) + '</td>' +
+        '<td>' + p.sellingPrice.toFixed(2) + '</td>' +
+        '<td>' + p.stock + '</td>' +
+        '<td><span class="badge ' + (low ? 'low' : 'ok') + '">' + (low ? 'Low stock' : 'OK') + '</span></td>' +
+        '</tr>';
+    }).join('');
+
+    productBody.querySelectorAll('[data-select]').forEach(function(radio){
+      radio.addEventListener('change', function(){
+        selectRow(Number(radio.dataset.select));
+      });
+    });
+  }
+
+  // init
+  resetForm();
+  renderList();
+})();
+</script>
 
 </body>
 </html>
