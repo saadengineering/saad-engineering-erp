@@ -1,1 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAAD Engineering — ERP</title>
 
+<style>
+:root{
+  --navy:#12202c;
+  --navy2:#1a2e3d;
+  --paper:#edeae0;
+  --paper2:#e4e0d2;
+  --ink:#1b2129;
+  --soft:#54606b;
+  --orange:#ff6a13;
+  --green:#3f7d5c;
+  --red:#c23b22;
+  --line:#c9c2b2;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Arial,sans-serif;
+}
+
+.app{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+  background:linear-gradient(180deg,var(--navy),var(--navy2));
+  color:white;
+  padding:20px 16px;
+  display:flex;
+  flex-direction:column;
+}
+
+.logo-box{
+  border:2px solid #405565;
+  padding:18px 12px;
+  margin-bottom:25px;
+  border-radius:5px;
+}
+
+.logo-box h2{
+  margin:0;
+  font-size:20px;
+}
+
+.logo-box p{
+  margin:7px 0 0;
+  color:var(--orange);
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.nav-title{
+  color:#8093a0;
+  font-size:11px;
+  margin:5px 8px 8px;
+  text-transform:uppercase;
+}
+
+.nav-btn{
+  width:100%;
+  padding:12px;
+  margin:3px 0;
+  border:1px solid transparent;
+  background:transparent;
+  color:#d5dfe5;
+  text-align:left;
+  cursor:pointer;
+  border-radius:4px;
+  font-size:14px;
+}
+
+.nav-btn:hover{
+  background:rgba(255,255,255,.06);
+}
+
+.nav-btn.active{
+  background:rgba(255,106,19,.15);
+  border-color:var(--orange);
+  color:white;
+}
+
+.sidebar-footer{
+  margin-top:auto;
+  padding-top:15px;
+  border-top:1px dashed #405565;
+  font-size:10px;
+  color:#82939e;
+  line-height:1.8;
+}
+
+/* MAIN */
+main{
+  padding:30px 38px 60px;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:36px 36px;
+}
+
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+.module-tag{
+  display:inline-block;
+  background:var(--ink);
+  color:white;
+  padding:7px 12px;
+  font-size:11px;
+  border-radius:3px;
+  margin-bottom:12px;
+}
+
+.module-tag span{
+  color:var(--orange);
+}
+
+h1{
+  margin:0 0 5px;
+  font-size:34px;
+}
+
+.subtitle{
+  color:var(--soft);
+  margin:0 0 25px;
+}
+
+/* KPI */
+.kpi-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.kpi{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:17px;
+  border-left:5px solid #3d5a6c;
+}
+
+.kpi.green{border-left-color:var(--green)}
+.kpi.red{border-left-color:var(--red)}
+.kpi.orange{border-left-color:var(--orange)}
+
+.kpi-label{
+  font-size:11px;
+  color:var(--soft);
+  text-transform:uppercase;
+}
+
+.kpi-value{
+  font-size:28px;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.kpi-small{
+  color:var(--soft);
+  font-size:12px;
+  margin-top:4px;
+}
+
+/* PANEL */
+.panel{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:6px;
+  margin-bottom:22px;
+  overflow:hidden;
+}
+
+.panel-head{
+  padding:14px 18px;
+  background:var(--paper2);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.panel-head h2{
+  margin:0;
+  font-size:16px;
+}
+
+.hint{
+  color:var(--soft);
+  font-size:12px;
+}
+
+/* FORM */
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  padding:18px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:10px;
+  color:var(--soft);
+  text-transform:uppercase;
+}
+
+input,select{
+  width:100%;
+  padding:10px;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:#fdfcf9;
+}
+
+input:focus,select:focus{
+  outline:2px solid #3d5a6c;
+}
+
+.form-actions{
+  grid-column:1/-1;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+button.primary{
+  background:var(--orange);
+  color:white;
+  border:0;
+  padding:10px 18px;
+  border-radius:4px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button.primary:hover{
+  opacity:.9;
+}
+
+/* TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+
+th{
+  text-align:left;
+  padding:11px 15px;
+  background:#faf8f2;
+  color:var(--soft);
+  font-size:10px;
+  text-transform:uppercase;
+  border-bottom:1px solid var(--line);
+}
+
+td{
+  padding:11px 15px;
+  border-bottom:1px solid #eee9dd;
+}
+
+tr:hover{
+  background:#faf8f2;
+}
+
+.mono{
+  font-family:monospace;
+}
+
+.pill{
+  display:inline-block;
+  padding:4px 9px;
+  border-radius:20px;
+  font-size:10px;
+}
+
+.pill.ok{
+  background:#e5f1e9;
+  color:var(--green);
+}
+
+.pill.warn{
+  background:#fbe7e1;
+  color:var(--red);
+}
+
+.pill.pending{
+  background:#fdeee0;
+  color:#7a2f00;
+}
+
+.remove{
+  background:white;
+  border:1px solid var(--line);
+  padding:5px 9px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.remove:hover{
+  color:var(--red);
+  border-color:var(--red);
+}
+
+.empty{
+  text-align:center;
+  color:var(--soft);
+  padding:25px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .app{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    border-bottom:5px solid #0a141c;
+  }
+
+  .kpi-row{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  main{
+    padding:20px;
+    overflow-x:auto;
+  }
+}
+
+@media(max-width:600px){
+  .kpi-row,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:27px;
+  }
+
+  table{
+    min-width:750px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+  <div class="logo-box">
+    <h2>SAAD ENGINEERING</h2>
+    <p>ERP MANAGEMENT SYSTEM</p>
+  </div>
+
+  <div class="nav-title">Modules</div>
+
+  <button class="nav-btn active" data-view="dashboard">
+    01 &nbsp; Dashboard
+  </button>
+
+  <button class="nav-btn" data-view="product">
+    02 &nbsp; Product Master
+  </button>
+
+  <button class="nav-btn" data-view="purchase">
+    03 &nbsp; Purchase
+  </button>
+
+  <button class="nav-btn" data-view="sales">
+    04 &nbsp; Sales
+  </button>
+
+  <div class="sidebar-footer">
+    ● SYSTEM ONLINE<br>
+    SESSION: LOCAL<br>
+    SAAD ENGINEERING ERP
+  </div>
+
+</aside>
+
+<!-- MAIN -->
+<main>
+
+<!-- DASHBOARD -->
+<section class="view active" id="view-dashboard">
+
+  <div class="module-tag">
+    <span>●</span> Module 01 · Overview
+  </div>
+
+  <h1>Dashboard</h1>
+  <p class="subtitle">
+    SAAD Engineering ERP management dashboard.
+  </p>
+
+  <div class="kpi-row">
+
+    <div class="kpi green">
+      <div class="kpi-label">Products</div>
+      <div class="kpi-value" id="kpi-products">0</div>
+      <div class="kpi-small">Product Master</div>
+    </div>
+
+    <div class="kpi red">
+      <div class="kpi-label">Low Stock</div>
+      <div class="kpi-value" id="kpi-low">0</div>
+      <div class="kpi-small">Reorder required</div>
+    </div>
+
+    <div class="kpi orange">
+      <div class="kpi-label">Purchase</div>
+      <div class="kpi-value" id="kpi-purchase">৳0</div>
+      <div class="kpi-small">Total purchase</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-label">Sales</div>
+      <div class="kpi-value" id="kpi-sales">৳0</div>
+      <div class="kpi-small" id="kpi-sales-count">
+        0 invoices
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel">
+
+    <div class="panel-head">
+      <h2>Recent Activity</h2>
+      <span class="hint">Purchase & Sales</span>
+    </div>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Reference</th>
+          <th>Party</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="activity-body">
+        <tr>
+          <td colspan="5" class="empty">
+            No activity yet.
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- PRODUCT MASTER -->
+<section class="view" id="view-product">
+
+  <div class="module-tag">
+    <span>●</span> Module 02 · Inventory
+  </div>
+
+  <h1>Product Master</h1>
+
+  <p class="subtitle">
+    Manage products, prices and stock.
+  </p>
+
+  <div class="panel">
+
+    <div class="panel-head">
+      <h2>Add Product</h2>
+      <span class="hint">Product information</span>
+    </div>
+
+    <form class="form-grid" id="product-form">
+
+      <div class="field">
+        <label>Product Code</label>
+        <input id="p-code" placeholder="SE-0001" required>
+      </div>
+
+      <div class="field">
+        <label>Product Name</label>
+        <input id="p-name" placeholder="Product name" required>
+      </div>
+
+      <div class="field">
+        <label>Category</label>
+        <input id="p-category" placeholder="Spare Parts">
+      </div>
+
+      <div class="field">
+        <label>Unit</label>
+        <select id="p-unit">
+          <option>pcs</option>
+          <option>set</option>
+          <option>kg</option>
+          <option>litre</option>
+          <option>meter</option>
+          <option>box</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Unit Price</label>
+        <input id="p-price" type="number" min="0" required>
+      </div>
+
+      <div class="field">
+        <label>Opening Stock</label>
+        <input id="p-stock" type="number" min="0" required>
+      </div>
+
+      <div class="field">
+        <label>Reorder Level</label>
+        <input id="p-reorder" type="number" min="0" required>
+      </div>
+
+      <div class="form-actions">
+        <button class="primary" type="submit">
+          + Add Product
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-head">
+      <h2>All Products</h2>
+      <span class="hint" id="product-count">0 items</span>
+    </div>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Unit</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="product-body">
+        <tr>
+          <td colspan="8" class="empty">
+            No products.
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- PURCHASE -->
+<section class="view" id="view-purchase">
+
+  <div class="module-tag">
+    <span>●</span> Module 03 · Procurement
+  </div>
+
+  <h1>Purchase</h1>
+
+  <p class="subtitle">
+    Record purchase and increase stock automatically.
+  </p>
+
+  <div class="panel">
+
+    <div class="panel-head">
+      <h2>New Purchase</h2>
+      <span class="hint">Stock In</span>
+    </div>
+
+    <form class="form-grid" id="purchase-form">
+
+      <div class="field">
+        <label>Supplier</label>
+        <input id="po-supplier" placeholder="Supplier name" required>
+      </div>
+
+      <div class="field">
+        <label>Product</label>
+        <select id="po-product" required>
+          <option value="">Select product</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Quantity</label>
+        <input id="po-qty" type="number" min="1" required>
+      </div>
+
+      <div class="field">
+        <label>Rate</label>
+        <input id="po-rate" type="number" min="0" required>
+      </div>
+
+      <div class="form-actions">
+        <button class="primary" type="submit">
+          + Create Purchase
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-head">
+      <h2>Purchase Orders</h2>
+      <span class="hint" id="purchase-count">0 orders</span>
+    </div>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>PO No.</th>
+          <th>Supplier</th>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Rate</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="purchase-body">
+        <tr>
+          <td colspan="8" class="empty">
+            No purchase orders.
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- SALES -->
+<section class="view" id="view-sales">
+
+  <div class="module-tag">
+    <span>●</span> Module 04 · Sales
+  </div>
+
+  <h1>Sales</h1>
+
+  <p class="subtitle">
+    Create sales invoices and automatically deduct stock.
+  </p>
+
+  <div class="panel">
+
+    <div class="panel-head">
+      <h2>New Sales</h2>
+      <span class="hint">Stock deduction</span>
+    </div>
+
+    <form class="form-grid" id="sales-form">
+
+      <div class="field">
+        <label>Customer</label>
+        <input id="so-customer" placeholder="Customer name" required>
+      </div>
+
+      <div class="field">
+        <label>Product</label>
+        <select id="so-product" required>
+          <option value="">Select product</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Quantity</label>
+        <input id="so-qty" type="number" min="1" required>
+      </div>
+
+      <div class="field">
+        <label>Rate</label>
+        <input id="so-rate" type="number" min="0" required>
+      </div>
+
+      <div class="form-actions">
+        <button class="primary" type="submit">
+          + Create Sales Invoice
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-head">
+      <h2>Sales Orders</h2>
+      <span class="hint" id="sales-count">0 orders</span>
+    </div>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Invoice No.</th>
+          <th>Customer</th>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Rate</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="sales-body">
+        <tr>
+          <td colspan="8" class="empty">
+            No sales orders.
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+</main>
+</div>
+
+
+<script>
+
+"use strict";
+
+/* ==============================
+   DATA
+============================== */
+
+let products =
+JSON.parse(localStorage.getItem("saad_products") || "[]");
+
+let purchases =
+JSON.parse(localStorage.getItem("saad_purchases") || "[]");
+
+let sales =
+JSON.parse(localStorage.getItem("saad_sales") || "[]");
+
+let productSeq =
+Number(localStorage.getItem("saad_product_seq") || 1);
+
+let purchaseSeq =
+Number(localStorage.getItem("saad_purchase_seq") || 1);
+
+let salesSeq =
+Number(localStorage.getItem("saad_sales_seq") || 1);
+
+
+/* ==============================
+   SAVE
+============================== */
+
+function saveData(){
+
+  localStorage.setItem(
+    "saad_products",
+    JSON.stringify(products)
+  );
+
+  localStorage.setItem(
+    "saad_purchases",
+    JSON.stringify(purchases)
+  );
+
+  localStorage.setItem(
+    "saad_sales",
+    JSON.stringify(sales)
+  );
+
+  localStorage.setItem(
+    "saad_product_seq",
+    productSeq
+  );
+
+  localStorage.setItem(
+    "saad_purchase_seq",
+    purchaseSeq
+  );
+
+  localStorage.setItem(
+    "saad_sales_seq",
+    salesSeq
+  );
+}
+
+
+/* ==============================
+   FORMAT
+============================== */
+
+function money(value){
+
+  return "৳" +
+    Number(value || 0).toLocaleString(
+      "en-IN",
+      {
+        maximumFractionDigits:2
+      }
+    );
+}
+
+
+/* ==============================
+   NAVIGATION
+============================== */
+
+document.querySelectorAll(".nav-btn")
+.forEach(button => {
+
+  button.addEventListener("click",function(){
+
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach(b => b.classList.remove("active"));
+
+    document
+      .querySelectorAll(".view")
+      .forEach(v => v.classList.remove("active"));
+
+    this.classList.add("active");
+
+    document
+      .getElementById(
+        "view-" + this.dataset.view
+      )
+      .classList.add("active");
+
+  });
+
+});
+
+
+/* ==============================
+   PRODUCT MASTER
+============================== */
+
+const productForm =
+document.getElementById("product-form");
+
+productForm.addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  const product = {
+
+    id:productSeq++,
+
+    code:
+      document.getElementById("p-code").value.trim(),
+
+    name:
+      document.getElementById("p-name").value.trim(),
+
+    category:
+      document.getElementById("p-category").value.trim()
+      || "General",
+
+    unit:
+      document.getElementById("p-unit").value,
+
+    price:
+      Number(document.getElementById("p-price").value),
+
+    stock:
+      Number(document.getElementById("p-stock").value),
+
+    reorder:
+      Number(document.getElementById("p-reorder").value)
+
+  };
+
+  products.push(product);
+
+  saveData();
+
+  productForm.reset();
+
+  renderAll();
+
+});
+
+
+function renderProducts(){
+
+  const body =
+  document.getElementById("product-body");
+
+  const count =
+  document.getElementById("product-count");
+
+  count.textContent =
+    products.length +
+    (products.length === 1 ? " item" : " items");
+
+  if(!products.length){
+
+    body.innerHTML =
+      `<tr>
+        <td colspan="8" class="empty">
+          No products.
+        </td>
+      </tr>`;
+
+    return;
+  }
+
+  body.innerHTML =
+    products.map(product => {
+
+      const low =
+        product.stock <= product.reorder;
+
+      return `
+      <tr>
+
+        <td class="mono">${product.code}</td>
+
+        <td>${product.name}</td>
+
+        <td>${product.category}</td>
+
+        <td>${product.unit}</td>
+
+        <td class="mono">
+          ${money(product.price)}
+        </td>
+
+        <td class="mono">
+          ${product.stock}
+        </td>
+
+        <td>
+          <span class="pill ${low ? "warn":"ok"}">
+            ${low ? "Low Stock":"In Stock"}
+          </span>
+        </td>
+
+        <td>
+          <button
+            class="remove"
+            onclick="removeProduct(${product.id})">
+            Remove
+          </button>
+        </td>
+
+      </tr>
+      `;
+
+    }).join("");
+
+}
+
+
+function removeProduct(id){
+
+  if(!confirm("Remove this product?")) return;
+
+  products =
+    products.filter(p => p.id !== id);
+
+  saveData();
+
+  renderAll();
+
+}
+
+
+/* ==============================
+   PRODUCT OPTIONS
+============================== */
+
+function renderProductOptions(){
+
+  const options =
+    `<option value="">
+      Select product
+    </option>` +
+
+    products.map(p =>
+
+      `<option value="${p.id}">
+        ${p.code} — ${p.name}
+        (${p.stock} ${p.unit})
+      </option>`
+
+    ).join("");
+
+  document.getElementById("po-product")
+    .innerHTML = options;
+
+  document.getElementById("so-product")
+    .innerHTML = options;
+
+}
+
+
+/* ==============================
+   PURCHASE
+============================== */
+
+document
+.getElementById("purchase-form")
+.addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  const supplier =
+    document.getElementById("po-supplier")
+    .value.trim();
+
+  const productId =
+    Number(
+      document.getElementById("po-product")
+      .value
+    );
+
+  const qty =
+    Number(
+      document.getElementById("po-qty")
+      .value
+    );
+
+  const rate =
+    Number(
+      document.getElementById("po-rate")
+      .value
+    );
+
+  const product =
+    products.find(p => p.id === productId);
+
+  if(!product){
+
+    alert("Please select a product.");
+
+    return;
+  }
+
+  product.stock += qty;
+
+  const order = {
+
+    id:purchaseSeq,
+
+    no:
+      "PO-" +
+      String(purchaseSeq).padStart(4,"0"),
+
+    supplier,
+
+    productName:product.name,
+
+    qty,
+
+    rate,
+
+    total:qty * rate,
+
+    status:"Received"
+
+  };
+
+  purchaseSeq++;
+
+  purchases.unshift(order);
+
+  saveData();
+
+  this.reset();
+
+  renderAll();
+
+});
+
+
+function renderPurchases(){
+
+  const body =
+    document.getElementById("purchase-body");
+
+  const count =
+    document.getElementById("purchase-count");
+
+  count.textContent =
+    purchases.length +
+    (purchases.length === 1
+      ? " order"
+      : " orders");
+
+  if(!purchases.length){
+
+    body.innerHTML =
+      `<tr>
+        <td colspan="8" class="empty">
+          No purchase orders.
+        </td>
+      </tr>`;
+
+    return;
+  }
+
+  body.innerHTML =
+    purchases.map(order => `
+
+      <tr>
+
+        <td class="mono">
+          ${order.no}
+        </td>
+
+        <td>
+          ${order.supplier}
+        </td>
+
+        <td>
+          ${order.productName}
+        </td>
+
+        <td class="mono">
+          ${order.qty}
+        </td>
+
+        <td class="mono">
+          ${money(order.rate)}
+        </td>
+
+        <td class="mono">
+          ${money(order.total)}
+        </td>
+
+        <td>
+          <span class="pill ok">
+            ${order.status}
+          </span>
+        </td>
+
+        <td>
+          <button
+            class="remove"
+            onclick="removePurchase(${order.id})">
+            Remove
+          </button>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+function removePurchase(id){
+
+  if(!confirm("Remove this purchase record?"))
+    return;
+
+  purchases =
+    purchases.filter(o => o.id !== id);
+
+  saveData();
+
+  renderAll();
+
+}
+
+
+/* ==============================
+   SALES
+============================== */
+
+document
+.getElementById("sales-form")
+.addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  const customer =
+    document.getElementById("so-customer")
+    .value.trim();
+
+  const productId =
+    Number(
+      document.getElementById("so-product")
+      .value
+    );
+
+  const qty =
+    Number(
+      document.getElementById("so-qty")
+      .value
+    );
+
+  const rate =
+    Number(
+      document.getElementById("so-rate")
+      .value
+    );
+
+  const product =
+    products.find(p => p.id === productId);
+
+  if(!product){
+
+    alert("Please select a product.");
+
+    return;
+  }
+
+  if(qty > product.stock){
+
+    alert(
+      "Only " +
+      product.stock +
+      " " +
+      product.unit +
+      " available."
+    );
+
+    return;
+  }
+
+  product.stock -= qty;
+
+  const invoice = {
+
+    id:salesSeq,
+
+    no:
+      "INV-" +
+      String(salesSeq).padStart(4,"0"),
+
+    customer,
+
+    productName:product.name,
+
+    qty,
+
+    rate,
+
+    total:qty * rate,
+
+    status:"Invoiced"
+
+  };
+
+  salesSeq++;
+
+  sales.unshift(invoice);
+
+  saveData();
+
+  this.reset();
+
+  renderAll();
+
+});
+
+
+function renderSales(){
+
+  const body =
+    document.getElementById("sales-body");
+
+  const count =
+    document.getElementById("sales-count");
+
+  count.textContent =
+    sales.length +
+    (sales.length === 1
+      ? " order"
+      : " orders");
+
+  if(!sales.length){
+
+    body.innerHTML =
+      `<tr>
+        <td colspan="8" class="empty">
+          No sales orders.
+        </td>
+      </tr>`;
+
+    return;
+  }
+
+  body.innerHTML =
+    sales.map(order => `
+
+      <tr>
+
+        <td class="mono">
+          ${order.no}
+        </td>
+
+        <td>
+          ${order.customer}
+        </td>
+
+        <td>
+          ${order.productName}
+        </td>
+
+        <td class="mono">
+          ${order.qty}
+        </td>
+
+        <td class="mono">
+          ${money(order.rate)}
+        </td>
+
+        <td class="mono">
+          ${money(order.total)}
+        </td>
+
+        <td>
+          <span class="pill pending">
+            ${order.status}
+          </span>
+        </td>
+
+        <td>
+          <button
+            class="remove"
+            onclick="removeSale(${order.id})">
+            Remove
+          </button>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+function removeSale(id){
+
+  if(!confirm("Remove this sales record?"))
+    return;
+
+  sales =
+    sales.filter(o => o.id !== id);
+
+  saveData();
+
+  renderAll();
+
+}
+
+
+/* ==============================
+   DASHBOARD
+============================== */
+
+function renderDashboard(){
+
+  document.getElementById("kpi-products")
+    .textContent = products.length;
+
+  const lowStock =
+    products.filter(
+      p => p.stock <= p.reorder
+    ).length;
+
+  document.getElementById("kpi-low")
+    .textContent = lowStock;
+
+
+  const purchaseTotal =
+    purchases.reduce(
+      (sum,p) => sum + Number(p.total || 0),
+      0
+    );
+
+  document.getElementById("kpi-purchase")
+    .textContent = money(purchaseTotal);
+
+
+  const salesTotal =
+    sales.reduce(
+      (sum,s) => sum + Number(s.total || 0),
+      0
+    );
+
+  document.getElementById("kpi-sales")
+    .textContent = money(salesTotal);
+
+  document.getElementById("kpi-sales-count")
+    .textContent =
+      sales.length +
+      (sales.length === 1
+        ? " invoice"
+        : " invoices");
+
+
+  const activity =
+    document.getElementById("activity-body");
+
+  const records = [
+
+    ...purchases.map(p => ({
+      type:"Purchase",
+      ref:p.no,
+      party:p.supplier,
+      amount:p.total,
+      status:p.status
+    })),
+
+    ...sales.map(s => ({
+      type:"Sale",
+      ref:s.no,
+      party:s.customer,
+      amount:s.total,
+      status:s.status
+    }))
+
+  ].slice(0,10);
+
+
+  if(!records.length){
+
+    activity.innerHTML =
+      `<tr>
+        <td colspan="5" class="empty">
+          No activity yet.
+        </td>
+      </tr>`;
+
+    return;
+  }
+
+
+  activity.innerHTML =
+    records.map(r => `
+
+      <tr>
+
+        <td>${r.type}</td>
+
+        <td class="mono">
+          ${r.ref}
+        </td>
+
+        <td>
+          ${r.party}
+        </td>
+
+        <td class="mono">
+          ${money(r.amount)}
+        </td>
+
+        <td>
+          <span class="pill ${
+            r.type === "Sale"
+              ? "pending"
+              : "ok"
+          }">
+            ${r.status}
+          </span>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+/* ==============================
+   RENDER ALL
+============================== */
+
+function renderAll(){
+
+  renderProducts();
+
+  renderProductOptions();
+
+  renderPurchases();
+
+  renderSales();
+
+  renderDashboard();
+
+}
+
+
+/* ==============================
+   DEMO DATA
+   Only added on first use
+============================== */
+
+if(products.length === 0){
+
+  products = [
+
+    {
+      id:productSeq++,
+      code:"SE-0001",
+      name:"Perkins Oil Filter",
+      category:"Generator Spare Parts",
+      unit:"pcs",
+      price:1200,
+      stock:25,
+      reorder:5
+    },
+
+    {
+      id:productSeq++,
+      code:"SE-0002",
+      name:"Diesel Fuel Filter",
+      category:"Generator Spare Parts",
+      unit:"pcs",
+      price:950,
+      stock:18,
+      reorder:5
+    },
+
+    {
+      id:productSeq++,
+      code:"SE-0003",
+      name:"Engine Belt",
+      category:"Generator Spare Parts",
+      unit:"pcs",
+      price:1500,
+      stock:12,
+      reorder:3
+    }
+
+  ];
+
+  saveData();
+
+}
+
+
+/* START */
+
+renderAll();
+
+</script>
+
+</body>
+</html>
